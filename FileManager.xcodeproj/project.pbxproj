@@ -15,6 +15,12 @@
 		368F07DD29CF0C5800083971 /* DocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F07DC29CF0C5800083971 /* DocumentsView.swift */; };
 		368F07E029CF0CDC00083971 /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F07DF29CF0CDC00083971 /* FileManagerService.swift */; };
 		368F07E229CF0E7100083971 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 368F07E129CF0E7100083971 /* .gitignore */; };
+		368F080529D32C6B00083971 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F080429D32C6B00083971 /* PasswordViewController.swift */; };
+		368F080729D32C8300083971 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F080629D32C8300083971 /* PasswordView.swift */; };
+		368F080A29D332BD00083971 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 368F080929D332BD00083971 /* KeychainSwift */; };
+		368F080E29D3336500083971 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F080D29D3336500083971 /* PasswordViewModel.swift */; };
+		368F081129D3341400083971 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F081029D3341400083971 /* SettingsViewController.swift */; };
+		368F081429D33CBC00083971 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F081329D33CBC00083971 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +34,11 @@
 		368F07DC29CF0C5800083971 /* DocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsView.swift; sourceTree = "<group>"; };
 		368F07DF29CF0CDC00083971 /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		368F07E129CF0E7100083971 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		368F080429D32C6B00083971 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		368F080629D32C8300083971 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		368F080D29D3336500083971 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
+		368F081029D3341400083971 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		368F081329D33CBC00083971 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				368F080A29D332BD00083971 /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,8 +72,10 @@
 		368F07C529CF08A000083971 /* FileManager */ = {
 			isa = PBXGroup;
 			children = (
+				368F080F29D333FD00083971 /* Settings */,
 				368F07C629CF08A000083971 /* AppDelegate.swift */,
 				368F07C829CF08A000083971 /* SceneDelegate.swift */,
+				368F080329D32C3400083971 /* Password */,
 				368F07DA29CF0A2400083971 /* Documents */,
 				368F07CF29CF08A100083971 /* Assets.xcassets */,
 				368F07D129CF08A100083971 /* LaunchScreen.storyboard */,
@@ -97,6 +111,49 @@
 			path = FileManager;
 			sourceTree = "<group>";
 		};
+		368F080329D32C3400083971 /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				368F080C29D3331200083971 /* ViewModel */,
+				368F080B29D332FD00083971 /* View */,
+			);
+			path = Password;
+			sourceTree = "<group>";
+		};
+		368F080B29D332FD00083971 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				368F080429D32C6B00083971 /* PasswordViewController.swift */,
+				368F080629D32C8300083971 /* PasswordView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		368F080C29D3331200083971 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				368F080D29D3336500083971 /* PasswordViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		368F080F29D333FD00083971 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				368F081229D33C9400083971 /* View */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		368F081229D33C9400083971 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				368F081029D3341400083971 /* SettingsViewController.swift */,
+				368F081329D33CBC00083971 /* SettingsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,6 +170,9 @@
 			dependencies = (
 			);
 			name = FileManager;
+			packageProductDependencies = (
+				368F080929D332BD00083971 /* KeychainSwift */,
+			);
 			productName = FileManager;
 			productReference = 368F07C329CF08A000083971 /* FileManager.app */;
 			productType = "com.apple.product-type.application";
@@ -141,6 +201,9 @@
 				Base,
 			);
 			mainGroup = 368F07BA29CF08A000083971;
+			packageReferences = (
+				368F080829D332BD00083971 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = 368F07C429CF08A000083971 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -169,10 +232,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				368F07E029CF0CDC00083971 /* FileManagerService.swift in Sources */,
+				368F080E29D3336500083971 /* PasswordViewModel.swift in Sources */,
+				368F080729D32C8300083971 /* PasswordView.swift in Sources */,
 				368F07CB29CF08A000083971 /* DocumentsViewController.swift in Sources */,
 				368F07C729CF08A000083971 /* AppDelegate.swift in Sources */,
+				368F081429D33CBC00083971 /* SettingsView.swift in Sources */,
 				368F07C929CF08A000083971 /* SceneDelegate.swift in Sources */,
 				368F07DD29CF0C5800083971 /* DocumentsView.swift in Sources */,
+				368F080529D32C6B00083971 /* PasswordViewController.swift in Sources */,
+				368F081129D3341400083971 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +452,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		368F080829D332BD00083971 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		368F080929D332BD00083971 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 368F080829D332BD00083971 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 368F07BB29CF08A000083971 /* Project object */;
 }

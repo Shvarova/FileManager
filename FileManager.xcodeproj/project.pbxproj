@@ -21,6 +21,7 @@
 		368F080E29D3336500083971 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F080D29D3336500083971 /* PasswordViewModel.swift */; };
 		368F081129D3341400083971 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F081029D3341400083971 /* SettingsViewController.swift */; };
 		368F081429D33CBC00083971 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F081329D33CBC00083971 /* SettingsView.swift */; };
+		368F081629D481B300083971 /* PasswordFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F081529D481B300083971 /* PasswordFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		368F080D29D3336500083971 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		368F081029D3341400083971 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		368F081329D33CBC00083971 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		368F081529D481B300083971 /* PasswordFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			children = (
 				368F080C29D3331200083971 /* ViewModel */,
 				368F080B29D332FD00083971 /* View */,
+				368F081729D481BD00083971 /* Factory */,
 			);
 			path = Password;
 			sourceTree = "<group>";
@@ -152,6 +155,14 @@
 				368F081329D33CBC00083971 /* SettingsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		368F081729D481BD00083971 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				368F081529D481B300083971 /* PasswordFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +252,7 @@
 				368F07DD29CF0C5800083971 /* DocumentsView.swift in Sources */,
 				368F080529D32C6B00083971 /* PasswordViewController.swift in Sources */,
 				368F081129D3341400083971 /* SettingsViewController.swift in Sources */,
+				368F081629D481B300083971 /* PasswordFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

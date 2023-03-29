@@ -7,23 +7,30 @@
 
 import UIKit
 
+enum UserDefaultsKey: String {
+    case sort
+    case hasAlreadyLaunched
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    
-    
+        
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let vc = PasswordViewController()
-        let nc = UINavigationController(rootViewController: vc)
-        nc.isNavigationBarHidden = true
-        let viewModel = PasswordViewModel()
-        viewModel.navigationController = nc
-        vc.setViewModel(viewModel: viewModel)
+        checkLaunch()
+        let nc = PasswordFactory.getViewController()
         window?.rootViewController = nc
         window?.makeKeyAndVisible()
     }
+    
+    private func checkLaunch() {
+            if !UserDefaults.standard.bool(forKey: UserDefaultsKey.hasAlreadyLaunched.rawValue) {
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.sort.rawValue)
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.hasAlreadyLaunched.rawValue)
+            }
+        }
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

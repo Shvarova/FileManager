@@ -100,9 +100,9 @@ final class PasswordView: UIView {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             
-            textField.heightAnchor.constraint(equalToConstant: 30),
+            textField.heightAnchor.constraint(equalToConstant: 50),
             
-            continueButton.heightAnchor.constraint(equalToConstant: 40),
+            continueButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     

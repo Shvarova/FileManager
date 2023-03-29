@@ -23,41 +23,56 @@ extension FileManagerError: LocalizedError {
     }
 }
 
-struct FileManagerService {
+class FileManagerService {
     private let fileManager = FileManager.default
     private var currentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     
-    func saveImage(image: UIImage, with name: String) throws {
+    var updateView: ((_ names: [String]) -> ())?
+    var showError: ((_ message: String) -> ())?
+    
+    func saveImage(image: UIImage, with name: String) {
         guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
-            throw FileManagerError.imageFormatError
+            showError?(FileManagerError.imageFormatError.localizedDescription)
+            return
         }
         guard let directory = try? fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
-            throw FileManagerError.directoryDoesntExist
+            showError?(FileManagerError.directoryDoesntExist.localizedDescription)
+            return
         }
         do {
             try data.write(to: directory.appendingPathComponent(name)!)
         } catch {
-            throw error
+            showError?(error.localizedDescription)
         }
     }
     
-    func contentsOfDirectory() -> Result<[String], Error> {
+    func contentsOfDirectory() {
         do {
-            let names = try fileManager.contentsOfDirectory(atPath: currentPath)
-            return .success(names)
+            var names = try fileManager.contentsOfDirectory(atPath: currentPath)
+            if UserDefaults.standard.bool(forKey: UserDefaultsKey.sort.rawValue) {
+                names = names.sorted()
+            }
+            updateView?(names)
         } catch {
-            return .failure(error)
+            showError?(error.localizedDescription)
         }
     }
     
-    func removeContent(with name: String) throws {
+    func removeContent(with name: String) {
         let dirPaths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let docsURL = dirPaths[0]
         let content = docsURL.appendingPathComponent(name).path
         do {
             try fileManager.removeItem(atPath: content)
         } catch {
-            throw error
+            showError?(error.localizedDescription)
         }
+    }
+}
+
+extension FileManagerService: FileManagerDelegate {
+    func sortFiles(_ needSorting: Bool) {
+        UserDefaults.standard.set(needSorting, forKey: UserDefaultsKey.sort.rawValue)
+        contentsOfDirectory()
     }
 }

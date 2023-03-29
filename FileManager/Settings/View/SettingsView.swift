@@ -8,8 +8,10 @@
 import UIKit
 
 final class SettingsView: UIView {
-    var switchAction: ((_ needSorted: Bool) -> ())?
-
+    
+    var switchAction: ((_ needSorting: Bool) -> ())?
+    var changePasswordAction: (() -> ())?
+    
     private lazy var sortLabel: UILabel = {
         let label = UILabel()
         label.text = "Sort"
@@ -20,8 +22,7 @@ final class SettingsView: UIView {
     private lazy var sortSwitch: UISwitch = {
         let sortSwitch = UISwitch()
         sortSwitch.backgroundColor = .white
-        sortSwitch.addTarget(self, action: #selector(sortSwitched), for: .allEditingEvents)
-        sortSwitch.thumbTintColor = .black
+        sortSwitch.addTarget(self, action: #selector(sortSwitched), for: .valueChanged)
         sortSwitch.layer.cornerRadius = 16
         sortSwitch.layer.masksToBounds = true
         sortSwitch.translatesAutoresizingMaskIntoConstraints = false
@@ -30,8 +31,11 @@ final class SettingsView: UIView {
     
     private lazy var changePasswordButton: UIButton = {
         let button = UIButton()
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 12
+        button.backgroundColor = .systemBlue
         button.setTitle("Change password", for: .normal)
-        button.backgroundColor = .systemRed
+        button.addTarget(self, action: #selector(changePasswordButtonTouched), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -49,11 +53,17 @@ final class SettingsView: UIView {
         switchAction?(sortSwitch.isOn)
     }
     
+    @objc private func changePasswordButtonTouched() {
+        changePasswordAction?()
+    }
+    
     private func setupView() {
         backgroundColor = .white
         addSubview(sortLabel)
         addSubview(sortSwitch)
         addSubview(changePasswordButton)
+        
+        sortSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultsKey.sort.rawValue)
         
         NSLayoutConstraint.activate([
             sortLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 24),
@@ -64,8 +74,8 @@ final class SettingsView: UIView {
             
             changePasswordButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             changePasswordButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            changePasswordButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            changePasswordButton.heightAnchor.constraint(equalToConstant: 30),
+            changePasswordButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            changePasswordButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }

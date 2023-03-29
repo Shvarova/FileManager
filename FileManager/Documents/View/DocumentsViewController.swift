@@ -8,10 +8,10 @@
 import UIKit
 
 class DocumentsViewController: UIViewController {
-
+    
     private lazy var mainView = DocumentsView()
     
-    private let fileManager = FileManagerService()
+    var fileManager: FileManagerService?
     
     private lazy var imagePicker: UIImagePickerController = {
         let picker = UIImagePickerController()
@@ -28,17 +28,15 @@ class DocumentsViewController: UIViewController {
         super.viewDidLoad()
         title = "Documents"
         setupNavigationBar()
+        fileManager?.updateView = mainView.setDocuments(documents:)
+        fileManager?.showError = showErrorAlert(message:)
         getContent()
         mainView.removeAction = removeDocument
     }
     
     private func removeDocument(with name: String) {
-        do {
-            try fileManager.removeContent(with: name)
-            getContent()
-        } catch {
-            showErrorAlert(message: error.localizedDescription)
-        }
+        fileManager?.removeContent(with: name)
+        getContent()
     }
     
     private func setupNavigationBar() {
@@ -48,14 +46,9 @@ class DocumentsViewController: UIViewController {
     }
     
     private func getContent() {
-        let result = fileManager.contentsOfDirectory()
-        switch result {
-        case .success(let items):
-            mainView.setDocuments(documents: items)
-        case .failure(let error): showErrorAlert(message: error.localizedDescription)
-        }
+        fileManager?.contentsOfDirectory()
     }
-   
+    
     private func showErrorAlert(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .cancel)
@@ -87,12 +80,8 @@ extension DocumentsViewController: UIImagePickerControllerDelegate, UINavigation
         dismiss(animated: true)
         
         showAlertToAddImage() { name in
-            do {
-                try self.fileManager.saveImage(image: image, with: name)
-                self.getContent()
-            } catch {
-                self.showErrorAlert(message: error.localizedDescription)
-            }
+            self.fileManager?.saveImage(image: image, with: name)
+            self.getContent()
         }
     }
 }
